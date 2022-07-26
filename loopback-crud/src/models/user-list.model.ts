@@ -56,8 +56,9 @@ export class UserList extends Entity {
 
   @property({
     type: 'date',
+    required: true
   })
-  modifiedOn?: string;
+  modifiedOn: string;
 
   @property({
     type: 'boolean',
