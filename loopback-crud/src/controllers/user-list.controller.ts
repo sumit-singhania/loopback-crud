@@ -17,13 +17,16 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
+import { error } from 'console';
 import {UserList} from '../models';
-import {UserListRepository} from '../repositories';
+import {CustomerRepository, UserListRepository} from '../repositories';
 
 export class UserListController {
   constructor(
     @repository(UserListRepository)
     public userListRepository : UserListRepository,
+    @repository(CustomerRepository)
+    public customerListRepository : CustomerRepository
   ) {}
 
   @post('/user-lists')
@@ -44,6 +47,13 @@ export class UserListController {
     })
     userList: Omit<UserList, 'id'>,
   ): Promise<UserList> {
+    const id = userList.customerId;
+    const customerExist = this.customerListRepository.findById(id);
+    const userWithCustomerIdExist = this.userListRepository.find({ where:{customerId: id}})
+    if (!customerExist && await userWithCustomerIdExist){
+     throw error;
+     
+    }
     return this.userListRepository.create(userList);
   }
 

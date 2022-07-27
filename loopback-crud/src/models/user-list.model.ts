@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, belongsTo} from '@loopback/repository';
+import {Customer} from './customer.model';
 
 @model({settings: {strict: false}})
 export class UserList extends Entity {
@@ -65,6 +66,8 @@ export class UserList extends Entity {
   })
   isEdit: boolean;
 
+  @belongsTo(() => Customer)
+  customerId: number;
   // Define well-known properties here
 
   // Indexer property to allow additional data
