@@ -1,7 +1,7 @@
 import {Entity, model, property, belongsTo} from '@loopback/repository';
-import {Customer} from './customer.model';
+import {Customer, CustomerWithRelations} from './customer.model';
 
-@model({settings: {strict: false}})
+@model({settings: {strict: true}})
 export class UserList extends Entity {
   @property({
     type: 'number',
@@ -81,6 +81,7 @@ export class UserList extends Entity {
 
 export interface UserListRelations {
   // describe navigational properties here
+  UserList : CustomerWithRelations;
 }
 
 export type UserListWithRelations = UserList & UserListRelations;
