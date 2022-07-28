@@ -1,6 +1,6 @@
 import {inject} from '@loopback/core';
 import {DefaultCrudRepository} from '@loopback/repository';
-import {InMemoryDbDataSource} from '../datasources';
+import {InMemoryDbDataSource, PostgresDbDataSource} from '../datasources';
 import {Role, RoleRelations} from '../models';
 
 export class RoleRepository extends DefaultCrudRepository<
@@ -9,7 +9,7 @@ export class RoleRepository extends DefaultCrudRepository<
   RoleRelations
 > {
   constructor(
-    @inject('datasources.inMemoryDb') dataSource: InMemoryDbDataSource,
+    @inject('datasources.postgresDb') dataSource: PostgresDbDataSource,
   ) {
     super(Role, dataSource);
   }
