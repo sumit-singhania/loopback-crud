@@ -13,7 +13,7 @@ export class CustomerRepository extends DefaultCrudRepository<
   public readonly userList: HasOneRepositoryFactory<UserList, typeof Customer.prototype.id>;
 
   constructor(
-    @inject('datasources.postgresDb') dataSource: PostgresDbDataSource, @repository.getter('UserListRepository') protected userListRepositoryGetter: Getter<UserListRepository>,
+    @inject('datasources.inMemoryDb') dataSource: InMemoryDbDataSource, @repository.getter('UserListRepository') protected userListRepositoryGetter: Getter<UserListRepository>,
   ) {
     super(Customer, dataSource);
     this.userList = this.createHasOneRepositoryFactoryFor('userList', userListRepositoryGetter);

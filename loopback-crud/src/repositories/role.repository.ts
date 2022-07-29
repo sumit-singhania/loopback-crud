@@ -9,7 +9,7 @@ export class RoleRepository extends DefaultCrudRepository<
   RoleRelations
 > {
   constructor(
-    @inject('datasources.postgresDb') dataSource: PostgresDbDataSource,
+    @inject('datasources.inMemoryDb') dataSource: InMemoryDbDataSource,
   ) {
     super(Role, dataSource);
   }

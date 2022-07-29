@@ -49,8 +49,8 @@ export class UserListController {
   ): Promise<UserList> {
     const id = userList.customerId;
     const customerExist = this.customerListRepository.findById(id);
-    const userWithCustomerIdExist = this.userListRepository.find({ where:{customerId: id}})
-    if (!customerExist && await userWithCustomerIdExist){
+    const userWithCustomerIdExist = await this.userListRepository.find({ where:{customerId: id}})
+    if (!customerExist &&  userWithCustomerIdExist!== undefined){
      throw error;
      
     }

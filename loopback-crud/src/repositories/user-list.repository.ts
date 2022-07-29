@@ -13,7 +13,7 @@ export class UserListRepository extends DefaultCrudRepository<
   public readonly customer: BelongsToAccessor<Customer, typeof UserList.prototype.userId>;
 
   constructor(
-    @inject('datasources.postgresDb') dataSource: PostgresDbDataSource, @repository.getter('CustomerRepository') protected customerRepositoryGetter: Getter<CustomerRepository>,
+    @inject('datasources.inMemoryDb') dataSource: InMemoryDbDataSource, @repository.getter('CustomerRepository') protected customerRepositoryGetter: Getter<CustomerRepository>,
   ) {
     super(UserList, dataSource);
     this.customer = this.createBelongsToAccessorFor('customer', customerRepositoryGetter,);
